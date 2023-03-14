@@ -14,6 +14,7 @@ const Version = "0.2.2"
 
 var (
 	FlagCPU                    = flag.Duration("c", 0, "Interval for CPU waste")
+	FlagCPURun                 = flag.Duration("r", 0, "Execute time for CPU waste")
 	FlagMemory                 = flag.Int("m", 0, "GiB of memory waste")
 	FlagNetwork                = flag.Duration("n", 0, "Interval for network speed test")
 	FlagNetworkConnectionCount = flag.Int("t", 10, "Set concurrent connections for network speed test")
@@ -41,7 +42,7 @@ func main() {
 		nothingEnabled = false
 		fmt.Println("====================")
 		fmt.Println("Starting CPU wasting with interval", *FlagCPU)
-		go waste.CPU(*FlagCPU)
+		go waste.CPU(*FlagCPU, *FlagCPURun)
 		runtime.Gosched()
 		fmt.Println("====================")
 	}
